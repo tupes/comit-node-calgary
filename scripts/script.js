@@ -2,6 +2,6 @@ window.onload = function () {
   var button = document.querySelector("button");
 
   button.addEventListener("click", function () {
-    alert("Rock!!");
+    alert("We're going to Rock!!");
   });
 };

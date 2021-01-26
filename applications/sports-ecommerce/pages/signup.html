@@ -6,6 +6,76 @@
     <title>Sign up</title>
   </head>
   <body>
-    Sign Up
+    <h1>Sign Up</h1>
+    <form action="http://localhost:80/form" method="POST">
+      <section>
+        <h2>Personal Information</h2>
+        <p>
+          <label
+            >Name
+            <input type="text" name="username" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Age
+            <input type="number" name="age" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Date of birth
+            <input type="date" name="dob" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Email
+            <input type="email" name="email" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Password
+            <input type="password" name="password" />
+          </label>
+        </p>
+      </section>
+
+      <section>
+        <h2>Email Preferences</h2>
+        <p>
+          <label
+            >Account emails
+            <input type="checkbox" name="emails" value="account" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Newsletter emails
+            <input type="checkbox" name="emails" value="newsletter" />
+          </label>
+        </p>
+      </section>
+
+      <section>
+        <h2>Terms of Service</h2>
+        <p>Do you agree to the terms of service?</p>
+        <p>
+          <label
+            >Yes
+            <input type="radio" name="tos" value="yes" />
+          </label>
+        </p>
+        <p>
+          <label
+            >No
+            <input type="radio" name="tos" value="no" />
+          </label>
+        </p>
+      </section>
+
+      <p><button type="submit">Submit</button></p>
+    </form>
   </body>
 </html>

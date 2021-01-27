@@ -1,6 +1,6 @@
 # Note-Passing Application
 
-![Example of final version](https://github.com/tupes/comit-saskatoon-react/blob/master/applications/notes/notes-example.png)
+![Example of final version](https://github.com/tupes/comit-node-calgary/blob/master/applications/notes-app/notes-example.png)
 
 ## Notedly
 

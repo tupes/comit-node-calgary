@@ -20,4 +20,4 @@ Issue Tracking Application helps you create a bunch of issues or bugs, assign th
 - Effort required to address the issue (number of days, a number)
 - Estimated completion date or due date (a date, optional)
 
-![Example final version](https://github.com/tupes/comit-saskatoon-react/blob/master/applications/issue-tracker/issue-tracker-example.png)
+![Example final version](https://github.com/tupes/comit-node-calgary/blob/master/applications/issue-tracker/issue-tracker-example.png)

@@ -1,9 +1,83 @@
+:root {
+  font-size: 16px;
+
+  --med-size: 1em;
+  --small-size: calc(var(--med-size) / 2);
+  --tiny-size: calc(var(--small-size) / 2);
+  --large-size: calc(var(--med-size) * 2);
+  --huge-size: calc(var(--med-size) * 3);
+
+  --med-border-radius: 0.4em;
+  --large-border-radius: calc(var(--med-border-radius) * 2);
+
+  --black: #212529;
+  --gray: #868e96;
+  --light-gray: #f1f3f5;
+  --extra-light-gray: #f8f9fa;
+  --white: #fff;
+
+  /* Bootstrap buttons*/
+  --primary-button: #337ab7;
+  --success-button: #5cb85c;
+  --info-button: #5bc0de;
+  --warning-button: #f0ad4e;
+  --danger-button: #d9534f;
+
+  /* Bootstrap background colors */
+  --primary-background: #337ab7;
+  --success-background: #dff0d8;
+  --info-background: #d9edf7;
+  --warning-background: #fcf8e3;
+  --danger-background: #f2dede;
+
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", "sans-serif";
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Sansita", serif;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  font-size: 1rem;
+}
+
 li {
   list-style-type: none;
 }
 
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.intro {
+  font-style: italic;
+  text-transform: capitalize;
+  text-align: center;
+}
+
 * {
-  border: 1px solid black;
+  box-sizing: inherit;
 }
 
 .container {
@@ -14,16 +88,31 @@ li {
     "header header account"
     "nav items items"
     "footer footer footer";
-  column-gap: 20px;
-  row-gap: 20px;
+  row-gap: 1rem;
 }
 
 .header {
   grid-area: header;
+  background-color: var(--black);
+  color: var(--white);
+
+  padding: var(--med-size);
 }
 
-.account {
+.login {
   grid-area: account;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.login button {
+  background-color: var(--primary-button);
+  padding: var(--small-size) var(--med-size);
+  border-radius: var(--med-border-radius);
+}
+
+.login a {
+  color: var(--white);
 }
 
 .side-menu {
@@ -39,59 +128,36 @@ li {
 }
 
 .signup-button {
-  padding: 10px 15px;
-  margin: 10px;
-}
-
-nav {
-  border: 30px solid black;
-  margin: 10px;
+  padding: 0.67rem 1rem;
+  margin: 1rem;
 }
 
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.shared {
-  background-color: rgb(0, 255, 0, 0.3);
-  color: rgba(45, 184, 103, 0.419);
+  align-items: center;
+  gap: var(--med-size);
 }
 
 .items {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-header::first-letter {
-  color: yellow;
-}
-
-a[href="./pages/chess.html"] {
-  color: yellow;
-}
-
-.soccer:hover {
-  color: black;
+  gap: 1rem;
 }
 
 .items li {
-  color: white;
-  background-color: red;
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: auto auto auto;
   grid-template-areas:
     "image name price"
     "image description cart-button";
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .items li img {
   grid-area: image;
-  height: 100%;
+  height: 100px;
   width: 100px;
 }
 
@@ -109,8 +175,4 @@ a[href="./pages/chess.html"] {
 
 .items li button {
   grid-area: cart-button;
-}
-
-h2 + ul * {
-  color: blue;
 }

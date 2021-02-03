@@ -1,0 +1,18 @@
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--med-size);
+  padding: 0 var(--med-size);
+}
+
+.nav-links li {
+  /* width: 100%; */
+}
+
+.nav-links button {
+  background-color: var(--primary-button);
+  border-radius: var(--med-border-radius);
+  width: 100%;
+  height: var(--huge-size);
+}

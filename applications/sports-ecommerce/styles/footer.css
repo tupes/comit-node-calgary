@@ -1,0 +1,8 @@
+.footer {
+  padding: var(--med-size);
+  border-top: var(--tiny-size) solid var(--white);
+}
+
+.footer a {
+  color: var(--medium-green);
+}

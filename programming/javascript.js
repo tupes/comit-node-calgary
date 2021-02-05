@@ -7,3 +7,5 @@ function processInput(text) {
   }
   console.log(result);
 }
+
+processInput("hey everyone");

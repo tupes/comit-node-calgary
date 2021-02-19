@@ -5,6 +5,9 @@
     text-align: center;
     border-radius: 10px;
     background-color: rgb(204, 164, 164);
+    grid-template-rows: 1fr 2fr .25fr;
+    /* grid-template-columns: 1fr 3fr 1fr; */
+    display: grid;
 }
 h1{
     font-family: 'Righteous', cursive;

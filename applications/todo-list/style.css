@@ -1,16 +1,27 @@
 .container {
     height: 600px;
     width: 100%;
-    border: 3px solid rgb(34, 34, 109);
+    border: 10px solid black;
     text-align: center;
     border-radius: 10px;
 }
 h1{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Righteous', cursive;
+    color: rgb(218, 16, 16);
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+h2 {
+    font-family: 'Righteous', cursive;
+
+}
+
+p {
+    font-family: monospace;
 }
 
 .header-container {
     height: 100px;
     width: 100%;
-    b
 }

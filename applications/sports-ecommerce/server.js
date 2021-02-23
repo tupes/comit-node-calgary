@@ -2,6 +2,8 @@ const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 
+const data = require("./data.json");
+
 const app = express();
 app.engine(
   "handlebars",
@@ -15,7 +17,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { items: data.items });
 });
 app.get("/signup", (req, res) => {
   res.render("signup");

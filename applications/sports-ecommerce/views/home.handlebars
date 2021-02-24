@@ -1,0 +1,35 @@
+
+<nav class="side-menu">
+    <ul class="nav-links">
+        <li>
+        <button><a href="index.html">All</a></button>
+        </li>
+        <li>
+        <button><a href="./pages/watersports.html">Watersports</a></button>
+        </li>
+        <li>
+        <button>
+            <a href="./pages/soccer.html" class="soccer">Soccer</a>
+        </button>
+        </li>
+        <li>
+        <button><a href="./pages/chess.html">Chess</a></button>
+        </li>
+    </ul>
+</nav>
+
+<section class="content">
+    <p>Hi {{{username}}}, have a look at what we have for sale!</p>
+    <ul class="items">
+        {{#each items}}
+        <li>
+            <img src={{image}} alt="" height="50px" width="50px" />
+            <h2>{{name}}</h2>
+            <span>${{price}}</span>
+            <p>{{description}}</p>
+            <button>Add To Cart</button>
+        </li>
+        {{/each}}
+    </ul>
+</section>
+

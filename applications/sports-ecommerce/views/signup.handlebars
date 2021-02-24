@@ -1,0 +1,88 @@
+<div></div>
+<form action="submit" method="POST">
+  <section>
+    <h2>Personal Information</h2>
+    <p>
+      <label
+        >Name
+        <input type="text" name="username" required />
+      </label>
+    </p>
+    <p>
+      <label
+        >Age
+        <input type="number" name="age" disabled />
+      </label>
+    </p>
+    <p>
+      <label
+        >Date of birth
+        <input type="date" name="dob" />
+      </label>
+    </p>
+    <p>
+      <label
+        >Email
+        <input type="email" name="email" />
+      </label>
+    </p>
+    <p>
+      <label
+        >Country
+        <select name="country">
+          <option value="CA">Canada</option>
+          <option value="US">United States</option>
+          <option value="MX">Mexico</option>
+        </select>
+      </label>
+    </p>
+    <p>
+      <label
+        >Password
+        <input
+          type="password"
+          name="password"
+          minlength="4"
+          maxlength="12"
+        />
+      </label>
+    </p>
+  </section>
+
+  <section>
+    <h2>Email Preferences</h2>
+    <p>
+      <label
+        >Account emails
+        <input type="checkbox" name="emails" value="account" checked />
+      </label>
+    </p>
+    <p>
+      <label
+        >Newsletter emails
+        <input type="checkbox" name="emails" value="newsletter" checked />
+      </label>
+    </p>
+  </section>
+
+  <section>
+    <h2>Terms of Service</h2>
+    <p>Do you agree to the terms of service?</p>
+    <p>
+      <label for="yes-button">Yes </label>
+      <input type="radio" name="tos" value="yes" checked id="yes-button" />
+    </p>
+    <p>
+      <label
+        >No
+        <input type="radio" name="tos" value="no" />
+      </label>
+    </p>
+  </section>
+
+  <p>
+    <button type="submit">Submit</button>
+    <button type="reset">Clear</button>
+    <button type="button">Do Something Else</button>
+  </p>
+</form>

@@ -21,7 +21,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // routing
 app.get("/", (req, res) => {
-  res.render("home", { items: data.items, username: "<i>Mark</i>" });
+  let itemsToDisplay = req.query.category
+    ? data.items.filter((item) => item.category === req.query.category)
+    : data.items;
+  res.render("home2", { items: itemsToDisplay, username: "<i>Mark</i>" });
+});
+app.get("/items", (req, res) => {
+  let itemsToDisplay = req.query.category
+    ? data.items.filter((item) => item.category === req.query.category)
+    : data.items;
+  res.json(itemsToDisplay);
 });
 app.get("/signup", (req, res) => {
   res.render("signup");

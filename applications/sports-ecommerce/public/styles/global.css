@@ -65,6 +65,7 @@ li {
 
 button {
   cursor: pointer;
+  color: var(--white);
 }
 
 a {

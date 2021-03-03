@@ -2,7 +2,7 @@ const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 
-const data = require("./data.json");
+const { getItems, getItemCategories } = require("./db.js");
 
 const app = express();
 
@@ -20,15 +20,15 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // routing
-app.get("/", (req, res) => {
-  const itemsToDisplay = req.query.category
-    ? data.items.filter((item) => item.category === req.query.category)
-    : data.items;
+app.get("/", async (req, res) => {
+  const items = await getItems();
+  const itemCategories = await getItemCategories();
 
-  // use timer to simulate delay from server
-  setTimeout(() => {
-    res.render("home", { items: itemsToDisplay });
-  }, 1000);
+  const itemsToDisplay = req.query.category
+    ? items.filter((item) => item.category === req.query.category)
+    : items;
+
+  res.render("home", { items: itemsToDisplay, itemCategories });
 });
 app.get("/signup", (req, res) => {
   res.render("signup");

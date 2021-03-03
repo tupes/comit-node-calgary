@@ -4,15 +4,11 @@
         <li>
             <a href="/"><button>All</button></a>
         </li>
+        {{#each itemCategories}}
         <li>
-            <a href="?category=watersports"><button>Watersports</button></a>
+            <a href="?category={{name}}"><button>{{name}}</button></a>
         </li>
-        <li>
-            <a href="?category=soccer"><button>Soccer</button></a>
-        </li>
-        <li>
-            <a href="?category=boardgames"><button>Boardgames</button></a>
-        </li>
+        {{/each}}
     </ul>
 </nav>
 

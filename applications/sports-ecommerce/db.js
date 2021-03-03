@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const Product = require("./models/product.js");
 const ProductCategory = require("./models/productCategory.js");
-const credentials = require("./credentials.develop.json");
-const { connectionString } = credentials.mongo;
+require("dotenv").config();
+//const { connectionString } = credentials.mongo;
 
-mongoose.connect(connectionString);
+mongoose.connect(process.env.connectionString);
 const db = mongoose.connection;
 
 db.once("open", () => {

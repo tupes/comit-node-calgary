@@ -4,9 +4,9 @@
         <li>
             <a href="/"><button>All</button></a>
         </li>
-        {{#each itemCategories as |category|}}
+        {{#each itemCategories}}
         <li>
-            <a href="?category={{category}}"><button>{{category}}</button></a>
+            <a href="?category={{this}}"><button>{{this}}</button></a>
         </li>
         {{/each}}
     </ul>

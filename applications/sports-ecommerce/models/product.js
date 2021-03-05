@@ -33,6 +33,7 @@ function list() {
 }
 
 module.exports = {
+  itemCategories,
   create,
   list,
 };

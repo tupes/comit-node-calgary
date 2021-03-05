@@ -4,9 +4,9 @@
         <li>
             <a href="/"><button>All</button></a>
         </li>
-        {{#each itemCategories}}
+        {{#each itemCategories as |category|}}
         <li>
-            <a href="?category={{name}}"><button>{{name}}</button></a>
+            <a href="?category={{category}}"><button>{{category}}</button></a>
         </li>
         {{/each}}
     </ul>
@@ -16,7 +16,7 @@
     <ul class="items">
         {{#each items}}
         <li>
-            <img src={{image}} alt="" height="50px" width="50px" />
+            <img src={{imageUrl}} alt="" height="50px" width="50px" />
             <h2>{{name}}</h2>
             <span>${{price}}</span>
             <p>{{description}}</p>

@@ -1,12 +1,38 @@
-const mongoose = require("mongoose");
+const cuid = require("cuid");
+const db = require("../db.js");
 
-const productSchema = mongoose.Schema({
+const itemCategories = [
+  "watersports",
+  "soccer",
+  "basketball",
+  "hockey",
+  "boardgames",
+];
+
+const productSchema = db.Schema({
+  _id: { type: String, default: cuid },
   name: String,
   price: Number,
   description: String,
-  image: String,
-  category: String,
+  imageUrl: String,
+  category: {
+    type: String,
+    index: true,
+    enum: itemCategories,
+  },
 });
 
-const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+const Product = db.model("Product", productSchema);
+
+function create(fields) {
+  return new Product(fields).save();
+}
+
+function list() {
+  return Product.find().lean();
+}
+
+module.exports = {
+  create,
+  list,
+};

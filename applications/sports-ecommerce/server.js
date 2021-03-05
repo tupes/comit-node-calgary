@@ -2,7 +2,8 @@ const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 
-const { getItems, getItemCategories } = require("./db.js");
+const product = require("./models/product.js");
+const user = require("./models/user.js");
 
 const app = express();
 
@@ -21,8 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // routing
 app.get("/", async (req, res) => {
-  const items = await getItems();
-  const itemCategories = await getItemCategories();
+  const items = await product.list();
+  const itemCategories = product.itemCategories;
 
   const itemsToDisplay = req.query.category
     ? items.filter((item) => item.category === req.query.category)
@@ -33,8 +34,9 @@ app.get("/", async (req, res) => {
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
-app.post("/submit", (req, res) => {
-  res.send(`Thanks, ${req.body.username}, for signing up!`);
+app.post("/submit", async (req, res) => {
+  await user.create({ ...req.body, category: "customer" });
+  res.redirect("/");
 });
 
 // start the server

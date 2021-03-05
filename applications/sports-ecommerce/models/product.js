@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+const cuid = require("cuid");
+const db = require("../db.js");
 
-const productSchema = mongoose.Schema({
+const productSchema = db.Schema({
+  _id: { type: String, default: cuid },
   name: String,
   price: Number,
   description: String,
@@ -8,5 +10,12 @@ const productSchema = mongoose.Schema({
   category: String,
 });
 
-const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+const Product = db.model("Product", productSchema);
+
+async function create(fields) {
+  return await new Product(fields).save();
+}
+
+module.exports = {
+  create,
+};

@@ -32,7 +32,7 @@ function list() {
 
 async function get(name, password) {
   foundUser = await User.findOne({ name }).exec();
-  if (foundUser.password === password) {
+  if (await bcrypt.compare(password, foundUser.password)) {
     return foundUser;
   }
   return null;

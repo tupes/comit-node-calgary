@@ -22,10 +22,15 @@ function create(fields) {
 }
 
 function list() {
-  return User.find().lean();
+  return User.find().exec();
+}
+
+function get(conditions) {
+  return User.findOne(conditions).exec();
 }
 
 module.exports = {
   create,
   list,
+  get,
 };

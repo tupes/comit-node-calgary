@@ -38,6 +38,20 @@ app.post("/submit", async (req, res) => {
   await user.create({ ...req.body, category: "customer" });
   res.redirect("/");
 });
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.post("/login", async (req, res) => {
+  const currentUser = await user.get({
+    name: req.body.name,
+    password: req.body.password,
+  });
+  console.log(currentUser);
+  if (currentUser) {
+    res.redirect("/");
+  }
+  res.status(404).send("Incorrect name or password");
+});
 
 // start the server
 app.listen(3000, () => {

@@ -34,8 +34,16 @@ app.get("/", async (req, res) => {
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
-app.post("/submit", async (req, res) => {
+app.post("/signup", async (req, res) => {
   await user.create({ ...req.body, category: "customer" });
+  res.redirect("/");
+});
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.post("/login", async (req, res) => {
+  const currentUser = await user.get(req.body.name, req.body.password);
+  console.log(currentUser);
   res.redirect("/");
 });
 

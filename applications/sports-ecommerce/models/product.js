@@ -29,7 +29,7 @@ function create(fields) {
 }
 
 function list() {
-  return Product.find().lean();
+  return Product.find().setOptions({ lean: true }).exec();
 }
 
 module.exports = {

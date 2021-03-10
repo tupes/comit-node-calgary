@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
@@ -31,6 +32,14 @@ app.get("/", async (req, res) => {
 
   res.render("home", { items: itemsToDisplay, itemCategories });
 });
+app.get("/cart", (req, res) => {
+  const jwtString = req.cookies.jwt;
+  const isVerified = await auth.verify(jwtString);
+  if (isVerified) {
+    res.send("User Cart");
+  }
+  res.status(403).send('Unable to access cart');
+});
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -42,9 +51,10 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 app.post("/login", async (req, res) => {
-  const currentUser = await user.get(req.body.name, req.body.password);
-  console.log(currentUser);
-  res.redirect("/");
+  const token = await user.login(req.body.name, req.body.password);
+  console.log(token);
+  res.cookie("jwt", token, { httpOnly: true });
+  res.redirect(303, "/");
 });
 
 // start the server

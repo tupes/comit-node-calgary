@@ -2,6 +2,7 @@ const cuid = require("cuid");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 const db = require("../db.js");
+const auth = require("../services/auth.js");
 
 const userCategories = ["customer", "admin"];
 const SALT_ROUNDS = 10;
@@ -26,20 +27,22 @@ async function create(fields) {
   }).save();
 }
 
-function list() {
-  return User.find().lean();
-}
-
-async function get(name, password) {
+async function login(name, password) {
   foundUser = await User.findOne({ name }).exec();
-  if (await bcrypt.compare(password, foundUser.password)) {
-    return foundUser;
+  if (!foundUser) {
+    console.log(`Could not find user with name ${name}`);
+    return null;
   }
-  return null;
+
+  const isAuthenticated = await bcrypt.compare(password, foundUser.password);
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return auth.sign(name);
 }
 
 module.exports = {
   create,
-  list,
-  get,
+  login,
 };

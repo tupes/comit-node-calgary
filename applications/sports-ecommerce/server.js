@@ -34,11 +34,11 @@ app.get("/", async (req, res) => {
 });
 app.get("/cart", (req, res) => {
   const jwtString = req.cookies.jwt;
-  const isVerified = await auth.verify(jwtString);
+  const isVerified = auth.verify(jwtString);
   if (isVerified) {
     res.send("User Cart");
   }
-  res.status(403).send('Unable to access cart');
+  res.status(403).send("Unable to access cart");
 });
 app.get("/signup", (req, res) => {
   res.render("signup");

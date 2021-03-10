@@ -1,10 +1,13 @@
 const cuid = require("cuid");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const db = require("../db.js");
 
 const userCategories = ["customer", "admin"];
 const SALT_ROUNDS = 10;
+const jwtSecret = process.env.JWT_SECRET;
+const jwtOpts = { algorithm: "HS256", expiresIn: "30d" };
 
 const userSchema = db.Schema({
   _id: { type: String, default: cuid },
@@ -26,20 +29,15 @@ async function create(fields) {
   }).save();
 }
 
-function list() {
-  return User.find().lean();
-}
-
-async function get(name, password) {
+async function login(name, password) {
   foundUser = await User.findOne({ name }).exec();
   if (await bcrypt.compare(password, foundUser.password)) {
-    return foundUser;
+    return await jwt.sign({ name: foundUser.name }, jwtSecret, jwtOpts);
   }
   return null;
 }
 
 module.exports = {
   create,
-  list,
-  get,
+  login,
 };

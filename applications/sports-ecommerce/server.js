@@ -42,9 +42,13 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 app.post("/login", async (req, res) => {
-  const currentUser = await user.get(req.body.name, req.body.password);
-  console.log(currentUser);
-  res.redirect("/");
+  const token = await user.login(req.body.name, req.body.password);
+  console.log(token);
+  if (token) {
+    res.json({ success: true, token });
+  } else {
+    res.json({ success: false });
+  }
 });
 
 // start the server

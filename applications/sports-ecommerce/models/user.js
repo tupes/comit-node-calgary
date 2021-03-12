@@ -42,7 +42,12 @@ async function login(name, password) {
   return auth.sign(name);
 }
 
+function get(name) {
+  return User.findOne({ name }).exec();
+}
+
 module.exports = {
   create,
   login,
+  get,
 };

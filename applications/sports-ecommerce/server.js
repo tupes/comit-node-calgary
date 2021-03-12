@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
+const auth = require("./services/auth.js");
 const product = require("./models/product.js");
 const user = require("./models/user.js");
 
@@ -20,6 +22,12 @@ app.set("view engine", "handlebars");
 // middleware
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  console.log(req.connection.timeout);
+  next();
+});
 
 // routing
 app.get("/", async (req, res) => {
@@ -32,14 +40,16 @@ app.get("/", async (req, res) => {
 
   res.render("home", { items: itemsToDisplay, itemCategories });
 });
-app.get("/cart", (req, res) => {
-  const jwtString = req.cookies.jwt;
-  const isVerified = auth.verify(jwtString);
-  if (isVerified) {
-    res.send("User Cart");
-  }
-  res.status(403).send("Unable to access cart");
+
+app.get("/about", (req, res) => {
+  res.send("Our company has been providing great service for over 20 years!");
 });
+
+app.get("/cart", auth.authenticateUser, async (req, res) => {
+  const foundUser = await user.get(req.username);
+  res.send(`User Cart for ${foundUser.email}`);
+});
+
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -47,14 +57,21 @@ app.post("/signup", async (req, res) => {
   await user.create({ ...req.body, category: "customer" });
   res.redirect("/");
 });
+
 app.get("/login", (req, res) => {
+  console.log("Received GET for login");
   res.render("login");
 });
 app.post("/login", async (req, res) => {
+  console.log("Received POST for login");
   const token = await user.login(req.body.name, req.body.password);
   console.log(token);
   res.cookie("jwt", token, { httpOnly: true });
-  res.redirect(303, "/");
+  res.render("login", { message: "You have successfully logged in" });
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({ error: err });
 });
 
 // start the server

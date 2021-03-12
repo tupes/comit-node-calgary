@@ -2,6 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
+const auth = require("./services/auth.js");
 
 const product = require("./models/product.js");
 const user = require("./models/user.js");
@@ -20,6 +23,7 @@ app.set("view engine", "handlebars");
 // middleware
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // routing
 app.get("/", async (req, res) => {
@@ -32,14 +36,11 @@ app.get("/", async (req, res) => {
 
   res.render("home", { items: itemsToDisplay, itemCategories });
 });
-app.get("/cart", (req, res) => {
-  const jwtString = req.cookies.jwt;
-  const isVerified = auth.verify(jwtString);
-  if (isVerified) {
-    res.send("User Cart");
-  }
-  res.status(403).send("Unable to access cart");
+
+app.get("/cart", auth.authenticateUser, (req, res) => {
+  res.send("User Cart");
 });
+
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -47,6 +48,7 @@ app.post("/signup", async (req, res) => {
   await user.create({ ...req.body, category: "customer" });
   res.redirect("/");
 });
+
 app.get("/login", (req, res) => {
   res.render("login");
 });

@@ -22,6 +22,7 @@ app.set("view engine", "handlebars");
 // middleware
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
@@ -46,8 +47,12 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/cart", auth.authenticateUser, async (req, res) => {
-  const foundUser = await user.get(req.username);
-  res.send(`User Cart for ${foundUser.email}`);
+  const cart = await user.getCart(req.username);
+  res.render("cart", { items: cart });
+});
+app.post("/cart", auth.authenticateUser, async (req, res) => {
+  const itemCount = await user.addItemToCart(req.username, req.body.itemId);
+  res.json({ itemCount });
 });
 
 app.get("/signup", (req, res) => {

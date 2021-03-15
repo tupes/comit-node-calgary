@@ -16,6 +16,12 @@ const userSchema = db.Schema({
     type: String,
     enum: userCategories,
   },
+  cart: [
+    {
+      type: String,
+      ref: "Product",
+    },
+  ],
 });
 
 const User = db.model("User", userSchema);
@@ -46,8 +52,22 @@ function get(name) {
   return User.findOne({ name }).exec();
 }
 
+async function addItemToCart(name, itemId) {
+  console.log(itemId);
+  const user = await User.findOne({ name }).exec();
+  user.cart.push(itemId);
+  await user.save();
+  return user.cart.length;
+}
+
+function getCart(name) {
+  return User.findOne({ name }).populate("cart").exec();
+}
+
 module.exports = {
   create,
   login,
   get,
+  addItemToCart,
+  getCart,
 };

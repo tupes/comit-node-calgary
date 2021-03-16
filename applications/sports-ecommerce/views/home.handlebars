@@ -20,9 +20,11 @@
             <h2>{{name}}</h2>
             <span>${{price}}</span>
             <p>{{description}}</p>
-            <button>Add To Cart</button>
+            <button id={{_id}}>Add To Cart</button>
         </li>
         {{/each}}
     </ul>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="scripts/script.js"></script>

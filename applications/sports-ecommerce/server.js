@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const auth = require("./services/auth.js");
@@ -21,7 +20,8 @@ app.set("view engine", "handlebars");
 
 // middleware
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
@@ -49,6 +49,14 @@ app.get("/cart", auth.authenticateUser, async (req, res) => {
   const foundUser = await user.get(req.username);
   res.send(`User Cart for ${foundUser.email}`);
 });
+app.post("/cart", auth.authenticateUser, async (req, res) => {
+  console.log(req.body.itemId);
+  const updatedUser = await user.addItemToCart(req.username, req.body.itemId);
+  const cart = updatedUser.cart.map((item) => {
+    return { name: item.name, price: item.price };
+  });
+  res.json({ cart: cart });
+});
 
 app.get("/signup", (req, res) => {
   res.render("signup");
@@ -60,14 +68,19 @@ app.post("/signup", async (req, res) => {
 
 app.get("/login", (req, res) => {
   console.log("Received GET for login");
-  res.render("login");
+  res.render("login", {
+    layout: "alternative",
+  });
 });
 app.post("/login", async (req, res) => {
   console.log("Received POST for login");
   const token = await user.login(req.body.name, req.body.password);
   console.log(token);
   res.cookie("jwt", token, { httpOnly: true });
-  res.render("login", { message: "You have successfully logged in" });
+  res.render("login", {
+    layout: "alternative",
+    message: "You have successfully logged in",
+  });
 });
 
 app.use((err, req, res, next) => {

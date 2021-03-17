@@ -1,13 +1,6 @@
 const cuid = require("cuid");
 const db = require("../db.js");
-
-const itemCategories = [
-  "watersports",
-  "soccer",
-  "basketball",
-  "hockey",
-  "boardgames",
-];
+const productCategories = require("../data/productCategories.js");
 
 const productSchema = db.Schema({
   _id: { type: String, default: cuid },
@@ -18,22 +11,10 @@ const productSchema = db.Schema({
   category: {
     type: String,
     index: true,
-    enum: itemCategories,
+    enum: productCategories,
   },
 });
 
 const Product = db.model("Product", productSchema);
 
-function create(fields) {
-  return new Product(fields).save();
-}
-
-function list() {
-  return Product.find().setOptions({ lean: true }).exec();
-}
-
-module.exports = {
-  itemCategories,
-  create,
-  list,
-};
+module.exports = Product;

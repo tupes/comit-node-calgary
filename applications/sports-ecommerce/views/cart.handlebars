@@ -1,0 +1,14 @@
+<div></div>
+<section class="content">
+    <ul class="items">
+        {{#each products}}
+        <li>
+            <img src={{imageUrl}} alt="" height="50px" width="50px" />
+            <h2>{{name}}</h2>
+            <span>${{price}}</span>
+            <p>{{description}}</p>
+            <button id={{_id}}>Add To Cart</button>
+        </li>
+        {{/each}}
+    </ul>
+</section>

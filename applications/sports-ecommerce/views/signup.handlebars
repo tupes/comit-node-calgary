@@ -1,7 +1,9 @@
 <div></div>
 <form action="signup" method="POST">
   <section>
-    <h2>Personal Information</h2>
+    {{#if message}}
+      <p>{{message}}</p>
+    {{/if}}
     <p>
       <label
         >Name

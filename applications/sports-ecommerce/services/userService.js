@@ -5,10 +5,11 @@ const auth = require("../utils/auth.js");
 const SALT_ROUNDS = 10;
 
 async function createUser(fields) {
-  return new User({
+  await new User({
     ...fields,
     password: await bcrypt.hash(fields.password, SALT_ROUNDS),
   }).save();
+  return auth.sign(fields.name);
 }
 
 async function loginUser(name, password) {
@@ -30,8 +31,13 @@ function getUser(name) {
   return User.findOne({ name }).exec();
 }
 
+function getUserWithCart(name) {
+  return User.findOne({ name }).populate("cart").lean();
+}
+
 module.exports = {
   createUser,
   loginUser,
   getUser,
+  getUserWithCart,
 };

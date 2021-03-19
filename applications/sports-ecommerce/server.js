@@ -46,8 +46,14 @@ app.get("/cart", authenticateUser, renderUserCart);
 app.post("/cart", authenticateUser, addItemToCart);
 
 // error handling middleware
+app.use((req, res, next) => {
+  console.log(err);
+  res.status(404).render("error", { error: err });
+});
+
 app.use((err, req, res, next) => {
-  res.status(500).json({ error: err });
+  console.log(err);
+  res.status(500).render("error", { error: err });
 });
 
 // start the server

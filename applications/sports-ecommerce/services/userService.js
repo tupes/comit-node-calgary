@@ -5,6 +5,11 @@ const auth = require("../utils/auth.js");
 const SALT_ROUNDS = 10;
 
 async function createUser(fields) {
+  const foundUser = await getUser(fields.name);
+  if (foundUser) {
+    return "DUPLICATE_USERNAME";
+  }
+
   await new User({
     ...fields,
     password: await bcrypt.hash(fields.password, SALT_ROUNDS),

@@ -6,7 +6,7 @@ const userCategories = ["customer", "admin"];
 
 const userSchema = db.Schema({
   _id: { type: String, default: cuid },
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   email: { type: String, validate: { validator: isEmail } },
   password: { type: String, required: true },
   category: {

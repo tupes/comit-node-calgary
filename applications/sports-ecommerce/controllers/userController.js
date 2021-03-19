@@ -6,14 +6,23 @@ function renderSignupForm(req, res) {
   });
 }
 
-async function processSignupSubmission(req, res) {
-  const token = await createUser({ ...req.body, category: "customer" });
-  if (token) {
+async function processSignupSubmission(req, res, next) {
+  let token;
+  try {
+    token = await createUser({ ...req.body, category: "customer" });
+  } catch (error) {
+    next(error);
+  }
+
+  if (token === "DUPLICATE_USERNAME") {
+    message = "Username already taken";
+  } else if (token) {
     res.cookie("jwt", token, { httpOnly: true });
     message = "Thank you for creating an account!";
   } else {
     message = "An error has occurred. Please try again.";
   }
+
   res.render("signup", {
     layout: "alternative",
     message,
@@ -26,8 +35,14 @@ function renderLoginForm(req, res) {
   });
 }
 
-async function processLoginSubmission(req, res) {
-  const token = await loginUser(req.body.name, req.body.password);
+async function processLoginSubmission(req, res, next) {
+  let token;
+  try {
+    token = await loginUser(req.body.name, req.body.password);
+  } catch (error) {
+    next(error);
+  }
+
   if (token) {
     res.cookie("jwt", token, { httpOnly: true });
     message = "You have successfully logged in";

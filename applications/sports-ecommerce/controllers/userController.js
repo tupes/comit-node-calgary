@@ -46,13 +46,19 @@ async function processLoginSubmission(req, res, next) {
   if (token) {
     res.cookie("jwt", token, { httpOnly: true });
     message = "You have successfully logged in";
+    res.redirect("/");
   } else {
     message = "Invalid name or password";
+    res.render("login", {
+      layout: "alternative",
+      message,
+    });
   }
-  res.render("login", {
-    layout: "alternative",
-    message,
-  });
+}
+
+function renderLogout(req, res) {
+  res.clearCookie("jwt");
+  res.render("logout");
 }
 
 module.exports = {
@@ -60,4 +66,5 @@ module.exports = {
   processSignupSubmission,
   renderLoginForm,
   processLoginSubmission,
+  renderLogout,
 };

@@ -9,7 +9,19 @@ async function renderProductsList(req, res, next) {
       ? items.filter((item) => item.category === req.query.category)
       : items;
 
-    res.render("home", { items: itemsToDisplay, productCategories });
+    console.log(`Username: ${req.username}`);
+    // if (req.username) {
+    //   res.render("home", {
+    //     layout: "logged-in",
+    //     items: itemsToDisplay,
+    //     productCategories,
+    //   });
+    // } else {
+    res.render("home", {
+      layout: req.layout,
+      items: itemsToDisplay,
+      productCategories,
+    });
   } catch (error) {
     next(error);
   }

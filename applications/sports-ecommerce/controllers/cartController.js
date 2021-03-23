@@ -3,9 +3,9 @@ const cartService = require("../services/cartService.js");
 
 async function renderUserCart(req, res, next) {
   try {
-    const user = await getUserWithCart(req.username);
-    console.log(user.cart);
-    res.render("cart", { products: user.cart });
+    const cart = await cartService.getCart(req.username);
+    console.log(cart);
+    res.render("cart", { layout: req.layout, products: cart });
   } catch (error) {
     next(error);
   }

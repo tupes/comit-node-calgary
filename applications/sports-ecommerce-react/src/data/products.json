@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Soccer ball",
+    "price": 84,
+    "description": "The best soccer ball ever!",
+    "imageUrl": "imgs/soccer/ball.png",
+    "category": "soccer"
+  },
+  {
+    "name": "Tubing raft",
+    "price": 624,
+    "description": "Have some extreme fun being pulled in this raft!",
+    "imageUrl": "imgs/watersports/tube.png",
+    "category": "watersports"
+  },
+  {
+    "name": "Chess board and pieces",
+    "price": 499,
+    "description": "finest wood",
+    "imageUrl": "imgs/boardgames/woodenSet.png",
+    "category": "boardgames"
+  },
+  {
+    "name": "Team Canada soccer jersey",
+    "price": 591,
+    "description": "Display your national pride with this authentic Team Canada soccer jersey!",
+    "imageUrl": "imgs/soccer/shirtCanada.png",
+    "category": "soccer"
+  },
+  {
+    "name": "Goggles",
+    "price": 396,
+    "description": "Top-of-the-line goggles for the most extreme of watersports!",
+    "imageUrl": "imgs/watersports/sunglass.png",
+    "category": "watersports"
+  }
+]

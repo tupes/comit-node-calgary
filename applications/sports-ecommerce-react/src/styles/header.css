@@ -1,0 +1,28 @@
+.header {
+  background-color: var(--black);
+  color: var(--white);
+
+  padding: var(--med-size);
+  border-bottom: var(--tiny-size) solid var(--white);
+}
+
+.login {
+  background-color: var(--black);
+  color: var(--white);
+  justify-self: center;
+  align-self: center;
+}
+
+.login button {
+  background-color: var(--primary-button);
+  padding: var(--small-size) var(--med-size);
+  border-radius: var(--med-border-radius);
+}
+
+.login a {
+  color: var(--white);
+}
+
+.signup-button {
+  padding: 0.67rem 1rem;
+}

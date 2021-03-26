@@ -1,21 +1,20 @@
 import React from "react";
 
-export default function CategoryFilter() {
+export default function CategoryFilter(props) {
+  const { productCategories, handleClick } = props;
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <a href="index.html">All</a>
-        </li>
-        <li>
-          <a href="./pages/watersports.html">Watersports</a>
-        </li>
-        <li>
-          <a href="./pages/soccer.html">Soccer</a>
-        </li>
-        <li>
-          <a href="./pages/chess.html">Chess</a>
-        </li>
+    <nav className="side-menu">
+      <ul className="product-categories">
+        {productCategories.map((category) => {
+          return (
+            <li>
+              <button id={category} onClick={handleClick}>
+                {category}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

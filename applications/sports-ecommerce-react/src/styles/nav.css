@@ -12,3 +12,7 @@
   width: 100%;
   height: var(--huge-size);
 }
+
+.product-categories .selected-category {
+  background-color: var(--warning-button);
+}

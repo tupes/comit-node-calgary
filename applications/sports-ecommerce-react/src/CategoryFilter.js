@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function CategoryFilter(props) {
-  const { productCategories } = props;
-
-  const [currentCategory, setCurrentCategory] = useState(null);
-
-  const handleCategorySelection = (event) => {
-    const newCategory = event.target.id;
-    setCurrentCategory(newCategory);
-  };
-
+  const { productCategories, currentCategory, handleCategorySelection } = props;
   return (
     <nav className="side-menu">
+      <p>{currentCategory}</p>
       <ul className="product-categories">
         {console.log("\n")}
         {productCategories.map((category) => {

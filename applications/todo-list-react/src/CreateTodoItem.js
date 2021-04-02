@@ -1,26 +1,19 @@
-import React, { useState } from "react";
 import TodoItemDescription from "./TodoItemDescription";
 import AddTodoButton from "./AddTodoButton";
 
-export default function CreateTodoItem() {
-  const [todoItemDescription, setTodoItemDescription] = useState("");
-
-  const handleDescriptionChange = (event) => {
-    const description = event.target.value;
-    console.log(description);
-    setTodoItemDescription(description);
-  };
+export default function CreateTodoItem(props) {
+  const { description, errorMessage, handleChange, handleAddItem } = props;
 
   return (
     <section>
       <p>Enter To-Dos</p>
       <form>
         <TodoItemDescription
-          description={todoItemDescription}
-          handleChange={handleDescriptionChange}
+          description={description}
+          handleChange={handleChange}
         />
-        <p id="error-output"></p>
-        <AddTodoButton />
+        {errorMessage && <p id="error-output">{errorMessage}</p>}
+        <AddTodoButton handleAddItem={handleAddItem} />
       </form>
     </section>
   );

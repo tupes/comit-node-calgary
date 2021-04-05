@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   return (
@@ -9,11 +10,11 @@ export default function Header(props) {
 
       <div className="login">
         <button id="signup-button" className="signup-button">
-          <a href="signup">Sign up</a>
+          <Link to="signup">Signup</Link>
         </button>
 
         <button id="login-button" className="signup-button">
-          <a href="login">Login</a>
+          <Link to="login">Login</Link>
         </button>
       </div>
     </>

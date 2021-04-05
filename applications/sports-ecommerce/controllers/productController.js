@@ -27,6 +27,16 @@ async function renderProductsList(req, res, next) {
   }
 }
 
+async function getProductsList(req, res, next) {
+  try {
+    const products = await listProducts();
+    return res.json(products);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   renderProductsList,
+  getProductsList,
 };

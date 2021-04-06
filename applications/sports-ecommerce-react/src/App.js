@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./Header";
-import CategoryFilter from "./CategoryFilter";
-import ProductList from "./ProductList";
+import ProductsPage from "./pages/ProductsPage";
+import LoginPage from "./pages/LoginPage";
 import Footer from "./Footer";
 import staticProducts from "./data/products.json";
 import productCategories from "./data/productCategories.json";
@@ -21,16 +22,29 @@ function App() {
     : staticProducts;
 
   return (
-    <div className="container">
-      <Header title="Sports Store!" buttonText="Sign Up" />
-      <CategoryFilter
-        productCategories={productCategories}
-        currentCategory={currentCategory}
-        handleCategorySelection={handleCategorySelection}
-      />
-      <ProductList products={productsToDisplay} />
-      <Footer />
-    </div>
+    <Router>
+      <div className="container">
+        <Header />
+
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <ProductsPage
+                currentCategory={currentCategory}
+                productCategories={productCategories}
+                handleCategorySelection={handleCategorySelection}
+                products={productsToDisplay}
+              />
+            )}
+          />
+          <Route path="/login" component={LoginPage} />
+        </Switch>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

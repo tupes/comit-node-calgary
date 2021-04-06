@@ -3,8 +3,7 @@ import cuid from "cuid";
 
 import Header from "./Header";
 import CreateTodoItem from "./CreateTodoItem";
-import ActiveTodoList from "./ActiveTodoList";
-import CompletedTodoList from "./CompletedTodoList";
+import TodoItemsList from "./TodoItemsList";
 
 function App() {
   const [todoItemDescription, setTodoItemDescription] = useState("");
@@ -49,9 +48,22 @@ function App() {
     setTodoItems(updatedTodoItems);
   };
 
-  const handleDeleteItem = () => {
+  const handleDeleteItem = (event) => {
     console.log("Deleting item");
+
+    const filteredTodoItems = todoItems.filter((todoItem) => {
+      return todoItem.id !== event.target.id;
+    });
+
+    setTodoItems(filteredTodoItems);
   };
+
+  const activeTodos = todoItems.filter(
+    (todoItem) => todoItem.status !== "complete"
+  );
+  const completedTodos = todoItems.filter(
+    (todoItem) => todoItem.status === "complete"
+  );
 
   return (
     <div className="container">
@@ -63,12 +75,18 @@ function App() {
           handleChange={handleDescriptionChange}
           handleAddItem={handleAddItem}
         />
-        <ActiveTodoList
-          todoItems={todoItems}
+        <TodoItemsList
+          itemsStatus="Active"
+          todoItems={activeTodos}
           handleCompleteItem={handleCompleteItem}
           handleDeleteItem={handleDeleteItem}
         />
-        <CompletedTodoList todoItems={[]} />
+        <TodoItemsList
+          itemsStatus="Completed"
+          todoItems={completedTodos}
+          handleCompleteItem={handleCompleteItem}
+          handleDeleteItem={handleDeleteItem}
+        />
       </main>
     </div>
   );

@@ -43,22 +43,17 @@ function App() {
         <Header />
 
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <ProductsPage
-                currentCategory={currentCategory}
-                productCategories={productCategories}
-                handleCategorySelection={handleCategorySelection}
-                products={productsToDisplay}
-              />
-            )}
-          />
-          <Route
-            path="/login"
-            render={() => <LoginPage handleUpdateToken={handleUpdateToken} />}
-          />
+          <Route path="/" exact>
+            <ProductsPage
+              currentCategory={currentCategory}
+              productCategories={productCategories}
+              handleCategorySelection={handleCategorySelection}
+              products={productsToDisplay}
+            />
+          </Route>
+          <Route path="/login">
+            <LoginPage handleUpdateToken={handleUpdateToken} />
+          </Route>
         </Switch>
 
         <Footer />

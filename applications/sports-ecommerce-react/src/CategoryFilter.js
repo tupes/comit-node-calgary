@@ -6,11 +6,7 @@ export default function CategoryFilter(props) {
     <nav className="side-menu">
       <p>{currentCategory}</p>
       <ul className="product-categories">
-        {console.log("\n")}
         {productCategories.map((category) => {
-          console.log(
-            `Does ${category} match current category ${currentCategory}`
-          );
           return (
             <li>
               <button

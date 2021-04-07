@@ -56,6 +56,21 @@ async function processLoginSubmission(req, res, next) {
   }
 }
 
+async function processApiLoginSubmission(req, res, next) {
+  let token;
+  try {
+    token = await loginUser(req.body.name, req.body.password);
+  } catch (error) {
+    next(error);
+  }
+
+  if (token) {
+    res.json({ token, isSuccess: true });
+  } else {
+    res.json({ isSuccess: false });
+  }
+}
+
 function renderLogout(req, res) {
   res.clearCookie("jwt");
   res.render("logout");
@@ -66,5 +81,6 @@ module.exports = {
   processSignupSubmission,
   renderLoginForm,
   processLoginSubmission,
+  processApiLoginSubmission,
   renderLogout,
 };

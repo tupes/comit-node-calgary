@@ -2,23 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const {
   authenticateUser,
   validateAuthentication,
 } = require("./middleware/authMiddleware.js");
-const { renderProductsList } = require("./controllers/productController.js");
+const {
+  renderProductsList,
+  getProducts,
+} = require("./controllers/productController.js");
 const {
   renderSignupForm,
   processSignupSubmission,
   renderLoginForm,
   processLoginSubmission,
+  processApiLoginSubmission,
   renderLogout,
 } = require("./controllers/userController.js");
 const {
   renderUserCart,
   addItemToCart,
 } = require("./controllers/cartController.js");
+
+const port = process.env.PORT;
 
 const app = express();
 
@@ -32,6 +39,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // middleware
+app.use(cors());
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -51,6 +59,10 @@ app.post("/login", processLoginSubmission);
 app.get("/cart", validateAuthentication, renderUserCart);
 app.post("/cart", validateAuthentication, addItemToCart);
 
+// API
+app.get("/api/products", getProducts);
+app.post("/api/login", processApiLoginSubmission);
+
 // error handling middleware
 app.use((req, res, next) => {
   res.status(404).render("error", { message: "Page not found" });
@@ -62,6 +74,6 @@ app.use((err, req, res, next) => {
 });
 
 // start the server
-app.listen(3000, () => {
-  console.log("Express started on port 3000");
+app.listen(port, () => {
+  console.log(`Express started on port ${port}`);
 });

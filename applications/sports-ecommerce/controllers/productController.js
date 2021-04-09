@@ -10,13 +10,6 @@ async function renderProductsList(req, res, next) {
       : items;
 
     console.log(`Username: ${req.username}`);
-    // if (req.username) {
-    //   res.render("home", {
-    //     layout: "logged-in",
-    //     items: itemsToDisplay,
-    //     productCategories,
-    //   });
-    // } else {
     res.render("home", {
       layout: req.layout,
       items: itemsToDisplay,

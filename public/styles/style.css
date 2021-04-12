@@ -1,0 +1,47 @@
+body{
+  /* background-color:navy;  */
+background-color:skyblue;
+} 
+.header{
+    color:darkblue;
+    text-align: center;
+    padding-top: 5%;
+    /* background-color:navy;  */
+  }
+  #btn-login{
+    border-radius: 12px;
+    background-color:bisque;
+    color: navy;
+    font-size: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    border: navy;
+  }
+
+  #loginform{
+    padding-top: 40px;
+    color: black;
+}
+.values{
+  color:darkblue;
+  font-size: 15px;
+  font-family: sans-serif;
+}
+#name{
+  color:black;
+}
+#password{
+  color: black;
+}
+
+#submit{
+    border-radius: 12px;
+    background-color:bisque;
+    color: navy;
+    font-size: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    border: navy;
+  }
